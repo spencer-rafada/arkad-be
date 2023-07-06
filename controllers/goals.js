@@ -1,3 +1,12 @@
-const getAllGoals = () => {};
+const Goal = require('../models/goals');
 
-module.exports = { getAllGoals };
+const getAllGoals = async () => {
+  return await Goal.find();
+};
+
+const addGoal = async (newGoal) => {
+  const result = await new Goal(newGoal);
+  return await result.save();
+};
+
+module.exports = { getAllGoals, addGoal };
