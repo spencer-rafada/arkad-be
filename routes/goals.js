@@ -11,6 +11,16 @@ routes.get('/', async (req, res, next) => {
   }
 });
 
+routes.get('/:id', async (req, res, next) => {
+  try {
+    const goal = await goalsController.getGoalById(req.params.id);
+    if (goal) return res.status(200).send({ message: 'Fetched successfully', data: goal });
+    else return res.status(400).json({ message: 'Failed to fetch goals', error: e.message });
+  } catch (e) {
+    return res.status(400).json({ message: 'Server failed to fetch goals', error: e.message });
+  }
+});
+
 routes.post('/', async (req, res, next) => {
   try {
     const result = await goalsController.addGoal(req.body);
