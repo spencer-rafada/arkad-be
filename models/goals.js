@@ -21,7 +21,10 @@ const goalSchema = mongoose.Schema({
   goalDueDate: { type: String, required: false },
   hasSavingsAccount: { type: Boolean, required: true },
   complete: { type: Boolean, required: false, default: false },
-  payments: [{ type: Object, required: false }]
+  cost: { type: Number, required: true },
+  subGoals: { type: Object, required: false },
+  userId: { type: String, required: true },
+  savings: { type: Number, required: false, default: 0 }
 });
 
 module.exports = mongoose.model('Goal', goalSchema);
