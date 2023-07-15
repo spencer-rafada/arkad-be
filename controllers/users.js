@@ -24,4 +24,12 @@ const getUserById = async (id) => {
   return null;
 };
 
-module.exports = { addUser, getUserByTokenSub, getUserById };
+const updateUser = async (newUser, id) => {
+  return await User.updateOne({ _id: id }, newUser);
+};
+
+const updateUserSavings = async (price, id) => {
+  return await User.updateOne({ 'tokenData.sub': id }, { $inc: { savingsMoney: price } });
+};
+
+module.exports = { addUser, getUserByTokenSub, getUserById, updateUser, updateUserSavings };

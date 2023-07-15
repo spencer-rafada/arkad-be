@@ -1,6 +1,7 @@
 const routes = require('express').Router();
 
 const goalsController = require('../controllers/goals');
+const userController = require('../controllers/users');
 
 routes.get('/', async (req, res, next) => {
   try {
@@ -48,6 +49,7 @@ routes.post('/', async (req, res, next) => {
 routes.put('/:id', async (req, res, next) => {
   try {
     const result = await goalsController.updateGoal(req.body, req.params.id);
+    const addSavings = await userController.updateUserSavings(req.body.savings, req.body.userId);
     if (result.modifiedCount > 0) {
       res.status(204).json({ message: 'Updated goal successfully' });
     } else {

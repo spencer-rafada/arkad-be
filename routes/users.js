@@ -32,4 +32,17 @@ routes.get('/:id', async (req, res, next) => {
   }
 });
 
+routes.put('/:id', async (req, res, next) => {
+  try {
+    const result = await userController.updateUser(req.body, req.params.id);
+    if (result.modifiedCount > 0) {
+      res.status(204).json({ message: 'Updated user successfully' });
+    } else {
+      res.status(404).json({ message: 'Failed to update user' });
+    }
+  } catch (e) {
+    res.status(404).json({ message: 'Server failed to update user', error: e.message });
+  }
+});
+
 module.exports = routes;
